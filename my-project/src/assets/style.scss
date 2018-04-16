@@ -2,7 +2,9 @@
   font-size: 13px;
   padding-bottom: 60px;
   margin-top: 50px;
-
+  .mint-spinner-fading-circle {
+    margin: 0 auto;
+  }
   .d {
     display: flex;
   }
@@ -322,4 +324,14 @@
     font-size: 1.5em;
     font-weight: 700;
   }
+}
+code,
+pre {
+  display: block;
+  overflow: auto;
+  background: #f4f4f4;
+  padding: 5px 10px;
+  border: 1px solid #eee;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }

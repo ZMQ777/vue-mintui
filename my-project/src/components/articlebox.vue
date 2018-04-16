@@ -12,7 +12,24 @@
     </div>
     <div v-html="content" class="content">
     </div>
-    <div style="height:200px">
+    <div style="width:98%;margin:2em auto 0;color:black;">
+      {{item.replies.length}}回复
+    </div>
+    <div class="replies"> 
+      <ul>
+        <li v-for="(replie,index) in item.replies" :key="replie.id+index" class="admins">
+          <div class="adminP">
+            <img :src="replie.author.avatar_url" alt="">
+            <span class="name">{{replie.author.loginname}}</span>
+            {{index+1}}楼 *
+            {{changeTime(replie.create_at)}}
+          </div>
+          
+          <div v-html="replie.content" class="content"></div>
+        </li>
+      </ul>
+    </div>
+    <div style="height:20px">
     </div>
   </div>
 </template>
@@ -38,6 +55,12 @@ export default {
       }
     };
   },
+  // computed: {
+  //   replay: function() {
+  //     return this.item.replies.reverse();
+  //   }
+  // },
+
   methods: {
     rou(tab) {
       this.$router.push({
@@ -80,5 +103,42 @@ export default {
 .isselected {
   margin-bottom: 0;
   border-bottom: 2px solid #ff4081;
+}
+.artcle {
+  background-color: rgba(0, 0, 0, 0.07);
+}
+.article-title {
+  background-color: white;
+}
+.content {
+  background-color: white;
+  padding: 1em 0;
+}
+.adminP {
+  width: 100%;
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1em;
+  /* text-align: right; */
+}
+.adminP img {
+  width: 24px;
+  height: 24px;
+  display: inline;
+  position: absolute;
+  left: 0;
+  left: 1em;
+}
+.name {
+  text-decoration: none;
+  color: #3f51b5;
+}
+.admins {
+  background-color: white;
+  margin: 0 auto 6px;
+}
+ul {
+  width: 98%;
+  margin: 1% auto;
 }
 </style>

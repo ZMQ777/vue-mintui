@@ -1,5 +1,8 @@
 <template>
 <div>
+  <div v-show="loading" id="bp">
+    <mt-spinner type="fading-circle" style="margin:0 auto;"></mt-spinner>
+  </div>
   <ul class="dd" v-infinite-scroll="loadMore"
   infinite-scroll-disabled="loading"
   infinite-scroll-distance="10">
@@ -33,7 +36,7 @@ export default {
       page: 0,
       pagesize: 20,
       tab: this.q,
-      loading: false,
+      loading: true,
       types: {
         all: '首页',
         good: '精华',
@@ -65,6 +68,8 @@ export default {
     resload(tb) {
       this.tab = tb;
       this.page = 0;
+      this.loading = true;
+      this.list = null;
       this.$http
         .get(
           'https://cnodejs.org/api/v1/topics?page=' +
@@ -101,4 +106,17 @@ export default {
 };
 </script>
 <style scoped>
+#bp {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 100;
+  background-color: white;
+  /* opacity: 0.2; */
+  top: 0;
+  left: 0;
+}
+.mint-spinner-fading-circle {
+  margin: 0 auto;
+}
 </style>
