@@ -7,13 +7,16 @@
       <div @click="changeTab('ask')" :class="{isselected:tab=='ask'}">问答</div>
     </div>
     <div class="article-title">
-      <h1>
-        <span class="flag" v-show="item.top || item.good">{{(item.top ? '置顶' : '') || (item.good ? '精华': '') || types[item.tab]}}</span>{{item.title}}</h1>
+      <h1 style="text-align:center;">
+        <span class="flag" v-show="item.top || item.good">{{(item.top ? '置顶' : '') || (item.good ? '精华': '') || types[item.tab]}}</span>
+        {{item.title}}
+        <span style="display:block;font-size:0.5em;text-align:center;color:#666">发布于 {{changeTime(item.create_at)}} 作者 <span style="color: #3f51b5;">{{item.author.loginname}}</span> {{item.visit_count}} 次浏览 来自{{types[item.tab]}}</span>
+      </h1>
     </div>
     <div v-html="content" class="content">
     </div>
     <div style="width:98%;margin:2em auto 0;color:black;">
-      {{item.replies.length}}回复
+      {{replieslen}}回复
     </div>
     <div class="replies"> 
       <ul>
@@ -42,10 +45,12 @@ export default {
       tab: this.$route.params.tab,
       item: {
         top: '',
-        good: ''
+        good: '',
+        author: { loginname: '' }
       },
       content: '',
       selectedtype: 1,
+      replieslen: 0,
       types: {
         all: '全部',
         good: '精华',
@@ -95,6 +100,11 @@ export default {
         this.content = response.data.data.content;
         this.top = response.data.data.top;
         this.good = response.data.data.good;
+
+        this.replieslen =
+          response.data.data.replies == null
+            ? 0
+            : response.data.data.replies.length;
       });
   }
 };
@@ -112,7 +122,7 @@ export default {
 }
 .content {
   background-color: white;
-  padding: 1em 0;
+  padding: 1em 0.5em;
 }
 .adminP {
   width: 100%;
@@ -140,5 +150,8 @@ export default {
 ul {
   width: 98%;
   margin: 1% auto;
+}
+.markdown-text p {
+  padding: 0 1em;
 }
 </style>
