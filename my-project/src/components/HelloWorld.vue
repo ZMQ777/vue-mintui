@@ -1,17 +1,13 @@
 <template>
   <div class="hello" >
-
-
+    
     <mt-tabbar v-model="selected" >
       <mt-tab-item id="首页">
         <span slot="icon" class="iconfont icon-zhuye"></span>
         首页
       </mt-tab-item>
-      <mt-tab-item id="发现">
-        <span slot="icon" class="iconfont icon-zhuye"></span>发现
-      </mt-tab-item>
       <mt-tab-item id="我的">
-        <span slot="icon" class="iconfont icon-zhuye"></span> 我的
+        <span slot="icon" class="iconfont icon-gerenzhongxinkaobei"></span> 我的
       </mt-tab-item>
     </mt-tabbar>
     <mt-tab-container v-model="selected">
@@ -24,23 +20,21 @@
         </mt-navbar>
         <list q='all' ref="list"></list>
       </mt-tab-container-item>
-
-      <mt-tab-container-item id="发现">
-        111
-      </mt-tab-container-item>
       <mt-tab-container-item id="我的">
-        2222
+       <loadbox></loadbox>
       </mt-tab-container-item>
     </mt-tab-container>
   </div>
 </template>
 <script>
 import list from './list';
+import loadbox from './loadbox';
 var count = 0;
 export default {
   name: 'HelloWorld',
   components: {
-    list
+    list,
+    loadbox
   },
   data() {
     return {

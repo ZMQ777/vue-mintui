@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import MintUI from 'mint-ui';
+import axios from 'axios';
 import 'mint-ui/lib/style.css';
 import VueResource from 'vue-resource';
 import App from './App';
@@ -12,7 +13,9 @@ import moment from 'moment';
 Vue.config.productionTip = false;
 Vue.use(MintUI);
 Vue.use(VueResource);
+Vue.prototype.$ajax = axios;
 Vue.prototype.moment = moment;
+
 Vue.prototype.changeTime = time =>
   moment(time)
     .startOf('minute')

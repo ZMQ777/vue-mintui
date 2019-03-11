@@ -5,7 +5,7 @@
   </div>
   <ul class="dd" v-infinite-scroll="loadMore"
   infinite-scroll-disabled="loading"
-  infinite-scroll-distance="10">
+  infinite-scroll-distance="1">
     <li v-for="(item,index) in list" class="item" v-bind:key="item.id+index">
       <div class="avatar">
         <img :src="item.author.avatar_url" alt="">
@@ -62,8 +62,8 @@ export default {
         )
         .then(response => {
           this.list = this.list.concat(response.data.data);
-          this.loading = false;
         });
+      this.loading = false;
     },
     resload(tb) {
       this.tab = tb;

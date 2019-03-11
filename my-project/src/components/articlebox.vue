@@ -18,6 +18,9 @@
     <div style="width:98%;margin:2em auto 0;color:black;">
       {{replieslen}}回复
     </div>
+    <div style="padding:.5em 0 .5em 2em;background-color:white;">
+      <input type="text" class="txt" placeholder="请输入回复内容"><button class="txtbtn" @click="replay('')">回复</button>
+    </div>
     <div class="replies"> 
       <ul>
         <li v-for="(replie,index) in item.replies" :key="replie.id+index" class="admins">
@@ -26,6 +29,8 @@
             <span class="name">{{replie.author.loginname}}</span>
             {{index+1}}楼 *
             {{changeTime(replie.create_at)}}
+            <span style="position:absolute;right:2.5em;cursor: pointer;text-indent: 0;" @click="replay(replie.id)">回复</span>
+            <i class="iconfont icon-dianzan" style="position:absolute;right:1em;cursor: pointer;text-indent: 0;"></i>
           </div>
           
           <div v-html="replie.content" class="content"></div>
@@ -89,6 +94,9 @@ export default {
       } else if (type == 'ask') {
         this.rou('ask');
       }
+    },
+    replay(id) {
+      alert(id);
     }
   },
   created() {
@@ -153,5 +161,21 @@ ul {
 }
 .markdown-text p {
   padding: 0 1em;
+}
+.txt {
+  width: 80%;
+  height: 40px;
+  font-size: 1.3rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.txtbtn {
+  font-size: 1.3rem;
+  padding: 3px 5px;
+  background-color: #2196f3;
+  color: #fff;
+  border-radius: 3px;
 }
 </style>
